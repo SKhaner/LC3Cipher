@@ -1,9 +1,9 @@
 .ORIG x3000
 
-start   LEA, R0, startmsg ;load startmsg into R0, loads address of startmsg to R0
+        LEA, R0, startmsg ;load startmsg into R0, loads address of startmsg to R0
         PUTS ;load startmsg onto the screen, show R0 in terminal
 
-        ; print prompt for input and get input
+start   ; print prompt for input and get input
 getIN   LEA, R0, query ; load query into R0, loads address of query to R0
         PUTS ; load query onto the screen, show R0 in terminal
         GETC ; get in put from user without echo, save the input at an address so R0 is free, 
@@ -52,6 +52,7 @@ checkD  AND R4 R4 #0 ; clearing r4, where address to subroutine will be stored
         BRnp checkX ; goes to to check X if not D
         LEA, R0, keymsg ;load keymsg into R0, loads address of keymsg to R0
         PUTS
+        LD R5 cnt
         LD R4 goInD
         JSRR R4
         ; start caeser decrypt
@@ -75,7 +76,7 @@ checkX  AND R4 R4 #0 ; clearing r4, where address to subroutine will be stored
         BRnp notValid ; goes to to check X if not go to invalid
         LD R4 goX ; put subroutine address in R4
         JSRR R4
-        BRnzp start
+        BRnzp haltIT
 
 ; invalid
 notValid    LEA R0 invalid 
@@ -344,7 +345,7 @@ check9D      LD R6 Nine
             ADD R6 R0 R6 ; R0 + R6 -> R0 - R6 -> char - 39, store in R6
             BRnz notV ; if neg -> number is less than 9
             ;check Y1-Y3, can be anything between 0 and 9
-            LD R5 cnt
+            ; LD R5 cnt
 checkYD     ADD R5 R5 #1 ; increment cnt
             BRz doneLoopD
             ADD R3 R3 #1
