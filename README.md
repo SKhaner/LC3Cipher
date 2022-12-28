@@ -21,4 +21,4 @@ The goal is to encrypt a message, consisting of ASCII characters, using a key pr
   - enter the same key of length 5 used to encrypt(otherwise program prints invalid input).
   - the decrypted string is stored at x5000
 9. If you enter 'X'.
-  - Program clears where encrypted string is stored and restarts. 
+  - Program clears where encrypted string is stored and exits. 
